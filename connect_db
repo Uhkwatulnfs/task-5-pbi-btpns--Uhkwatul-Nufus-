@@ -1,0 +1,19 @@
+func QueryUser(username string) user {
+	var users = user{}
+	err = db.QueryRow(`
+		SELECT id, 
+		username, 
+		first_name, 
+		last_name, 
+		password 
+		FROM users WHERE username=?
+		`, username).
+		Scan(
+			&users.ID,
+			&users.Username,
+			&users.FirstName,
+			&users.LastName,
+			&users.Password,
+		)
+	return users
+}
