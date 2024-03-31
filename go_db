@@ -1,0 +1,13 @@
+func routes() {
+	http.HandleFunc("/register", register)
+}
+
+func main() {
+	connect_db()
+	routes()
+
+	defer db.Close()
+
+	fmt.Println("Server running on port :8000")
+	http.ListenAndServe(":8000", nil)
+}
